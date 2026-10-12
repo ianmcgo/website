@@ -518,6 +518,21 @@
 html.introx-on .title-top-group, html.introx-on .title-button-row, html.introx-on .title-footer, html.introx-on .cabal-logo, html.introx-on .patreon-logo, html.introx-on .vc-panel { opacity: 0; }
 html.introx-run .title-button-row, html.introx-run .title-footer, html.introx-run .cabal-logo, html.introx-run .patreon-logo, html.introx-run .vc-panel { animation: introFade 1000ms ease-out both; animation-delay: 16200ms; }
 
+.vc-panel{background:var(--sc);filter:drop-shadow(0 0 6px var(--sc));}
+.vc-panel::before{background:linear-gradient(180deg,rgba(3,10,8,0.94),rgba(3,10,8,0.97));}
+.vc-panel::after{background:repeating-linear-gradient(0deg,color-mix(in srgb,var(--sc) 6%,transparent) 0 1px,transparent 1px 3px),linear-gradient(100deg,transparent 40%,color-mix(in srgb,var(--sc) 20%,transparent) 50%,transparent 60%);background-size:100% 100%,260% 100%;background-position:0 0,160% 0;}
+.vc-head{color:var(--sc);text-shadow:0 0 6px var(--sc);}
+.vc-dot,.vc-panel.vc-live .vc-dot{background:var(--sc);box-shadow:0 0 6px var(--sc);}
+.vc-state,.vc-panel.vc-live .vc-state{color:var(--sc);border-color:var(--sc);text-shadow:0 0 5px var(--sc);}
+.vc-num{color:var(--sc);text-shadow:0 0 4px var(--sc),0 0 12px color-mix(in srgb,var(--sc) 60%,transparent);}
+.vc-num .vc-z{color:color-mix(in srgb,var(--sc) 18%,transparent);}
+.vc-num .vc-sep{color:var(--sc);text-shadow:0 0 6px var(--sc);}
+.vc-foot{color:var(--sc);border-top-color:color-mix(in srgb,var(--sc) 30%,transparent);}
+.vc-open{color:var(--sc);}
+.vc-bars i{background:var(--sc);box-shadow:0 0 4px var(--sc);}
+.vc-panel.vc-btn:hover,.vc-panel.vc-btn:focus-visible{filter:drop-shadow(0 0 8px var(--sc)) drop-shadow(0 0 18px var(--sc));}
+@media (max-width:600px){body.roomView .vc-panel{bottom:calc(92px + env(safe-area-inset-bottom,0px));}}
+
 body.inSection .vc-panel{display:block;}
 
 </style>
