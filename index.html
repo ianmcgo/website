@@ -102,6 +102,7 @@
   #welcomeText p{margin:0;font-size:13px;line-height:1.55;color:#d8e8e0;}
   #welcomeText p b{color:var(--sc);font-weight:normal;}
   .wBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+  #welcomeVer{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--dim);margin-top:2px;}
   #welcomeGo{font-size:24px;padding:6px 28px;border:2px solid var(--sc);color:var(--sc);}
   #welcomePat{font-family:'VT323',monospace;font-size:21px;letter-spacing:1px;padding:7px 14px;background:var(--sc);color:#0c0012;text-decoration:none;}
   @keyframes wIn{from{opacity:0;transform:scale(0.94);}to{opacity:1;transform:none;}}
@@ -579,6 +580,7 @@ body.inSection .vc-panel{display:block;}
       <p>This site is my portfolio. Dock at <b>GAMES</b> to see the games I've made. <b>CREATIVE</b> holds my books, tabletop game rules and the other creative things I've written. <b>STORE</b> is where you can find the collectibles and trading cards I sell. <b>SOCIALS</b> has my socials and resume.</p>
       <p>Enter space to fly between the warp gates, and spawn an enemy if you fancy a fight.</p>
       <div class="wBtns"><button id="welcomeGo">ENTER</button><a id="welcomePat" href="https://www.patreon.com/cw/ianmcg" target="_blank" rel="noopener">SUPPORT ON PATREON</a></div>
+      <div id="welcomeVer">v2.3.4 · 2026-10-12 14:39 PDT</div>
     </div>
   </div>
 </div>
@@ -4265,7 +4267,7 @@ setTimeout(resize, 300);
             list.innerHTML = '';
             rows.forEach(r => {
                 const b = document.createElement('button'); b.type = 'button';
-                const fresh = Date.now() - Date.parse(r.first_seen) < 864e5;
+                const fresh = vgData.fresh.has(r.country);
                 if (fresh) b.className = 'new';
                 const a = document.createElement('span'); a.textContent = vgLabel(r.country);
                 const c = document.createElement('span'); c.textContent = (fresh ? 'NEW · ' : '') + vgDate(r.first_seen);
@@ -4647,7 +4649,7 @@ setTimeout(resize, 300);
                 list.forEach(r => { vgData.map[r.country] = r.views; });
                 vgData.max = list.filter(r => r.country !== 'ZZ').reduce((m, r) => Math.max(m, r.views), 1);
                 vgData.total = Math.max(list.reduce((s, r) => s + r.views, 0), vcShown || 0);
-                vgData.fresh = new Set(list.filter(r => r.country !== 'ZZ' && r.first_seen && Date.now() - Date.parse(r.first_seen) < 864e5).map(r => r.country));
+                vgData.fresh = new Set(list.filter(r => r.country !== 'ZZ' && r.first_seen && Date.now() - Date.parse(r.first_seen) < 864e5).sort((x, y) => Date.parse(y.first_seen) - Date.parse(x.first_seen)).slice(0, 1).map(r => r.country));
                 vgData.fetched = Date.now();
                 vgData.ok = true;
                 vgMsg('');
